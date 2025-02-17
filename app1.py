@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, flash, url_for
 '''Basic Flask application to manage tasks, user can add, delete, complete and delete all tasks'''
 app1 = Flask(__name__)
-app1.secret_key = "secrecy"
+app1.secret_key = "secrect"
 
 tasks = []
 
