@@ -37,7 +37,7 @@ def complete_task(task_id):
     return redirect('/')
 
 #delete all tasks
-@app1.route('/deleteall')
+@app1.route('/delete_all')
 def delete_all():
     tasks.clear()
     flash('All tasks deleted successfully', 'danger')
