@@ -8,7 +8,7 @@ tasks = []
 #Home route
 @app1.route('/')
 def home():
-    return render_template('index.html', tasks = tasks, enumerate = enumerate)
+    return render_template('index.html', tasks = tasks)
 
 #add task
 @app1.route('/add', methods=['POST'])
