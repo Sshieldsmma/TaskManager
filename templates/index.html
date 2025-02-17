@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To Do List</title>
+    <link rel ="stylesheet" href = {{ url_for('static', filename = "styles.css") }}>
+</head>
+<body>
+    <h1>My To-Do List</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    
+    <script>
+        setTimeout(() => {
+            document.querySelector('.flashes').style.display = 'none';
+        }, 3000);
+    </script>
+    <form action="/add" method="post">
+        <input type="text" name="task" placeholder="Enter a task" required>
+        <input type="date" name="date" placeholder="Enter a Due Date">  
+        <button type="submit">Add Task</button>
+    </form>
+    <ul>
+        {% for task in tasks %}
+            <li>
+                {% if task.completed %}
+                    <span style="text-decoration: line-through;">{{ task.task }} - Due: {{ task.date }}</span>  
+                {% else %}
+                    {{ task.task }} - Due: {{ task.date }}  
+                {% endif %}
+                <a href="/complete/{{ loop.index0 }}">✔️</a>
+                <a href="/delete/{{ loop.index0 }}">❌</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <form action="/delete_all" method="get">
+        <button type="submit">Delete All Tasks</button>
+    </form>
+</body>
+</html>
